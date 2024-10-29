@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:time_table/model/text_widget_model.dart';
+import 'package:time_table/view/teacher_screen/teacher_screen.dart';
 
 class HomeScreenAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const HomeScreenAppBarWidget({
@@ -27,7 +28,9 @@ class HomeScreenAppBarWidget extends StatelessWidget implements PreferredSizeWid
         icon: const Icon(Icons.arrow_back_ios,color: Colors.white,)
       ):(isHomeScreen == true)?  IconButton(
         onPressed: () {
-          
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return TeacherScreen(screenSize: screenSize);
+          },));
         }, 
         icon: const Icon(Icons.person,color: Colors.white,)
       ):null, 
