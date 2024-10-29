@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:time_table/controller/home_screen_controller.dart';
 import 'package:time_table/model/text_widget_model.dart';
+import 'package:time_table/view/course_screen/floating_button/add_subject_alert_dialog/alert_close_button/alert_close_button.dart';
 import 'package:time_table/view/home_screen/bloc/home_screen_bloc.dart';
 
 void showAlertDialogForDataAdding({
@@ -28,12 +29,7 @@ void showAlertDialogForDataAdding({
                 size: screenSize.width / 17,
                 fontFamily: '',
                 weight: FontWeight.w600),
-            const Spacer(),
-            IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: Icon(Icons.close,size: screenSize.width/12,))
+            AlertCloseButton(screenSize: screenSize,)
           ],
         ),
         content: Column(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:time_table/controller/course_screen_controller.dart';
 import 'package:time_table/model/text_widget_model.dart';
+import 'package:time_table/view/course_screen/floating_button/add_subject_alert_dialog/alert_close_button/alert_close_button.dart';
+import 'package:time_table/view/course_screen/floating_button/add_subject_alert_dialog/subject_field_widget/subject_field_widget.dart';
 
 void showAddSubjectsDialog(
     {required BuildContext context,
@@ -19,12 +21,17 @@ void showAddSubjectsDialog(
           borderRadius: BorderRadius.circular(screenSize.width / 50),
         ),
         backgroundColor: Colors.white,
-        title: TextWidget(
-          text: 'ADD SUBJECTS',
-          color: Colors.blueGrey,
-          size: screenSize.width / 20,
-          fontFamily: '',
-          weight: FontWeight.bold,
+        title: Row(
+          children: [
+            TextWidget(
+              text: 'ADD SUBJECTS',
+              color: Colors.blueGrey,
+              size: screenSize.width / 20,
+              fontFamily: '',
+              weight: FontWeight.bold,
+            ),
+            AlertCloseButton(screenSize: screenSize,)
+          ],
         ),
         content: SingleChildScrollView(
           child: Column(
@@ -87,43 +94,3 @@ void showAddSubjectsDialog(
   );
 }
 
-class SubjectFieldWidget extends StatelessWidget {
-  final String label;
-  final TextEditingController controller;
-  final Size screenSize;
-
-  const SubjectFieldWidget({
-    super.key,
-    required this.label,
-    required this.controller,
-    required this.screenSize,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextWidget(
-          text: label,
-          color: Colors.blueGrey,
-          size: screenSize.width / 25,
-          fontFamily: '',
-          weight: FontWeight.w600,
-        ),
-        SizedBox(height: screenSize.height / 100),
-        TextField(
-          controller: controller,
-          textCapitalization: TextCapitalization.words,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(screenSize.width / 75),
-            ),
-            hintText: 'Enter $label',
-            hintStyle: TextStyle(color: Colors.grey[400]),
-          ),
-        ),
-      ],
-    );
-  }
-}

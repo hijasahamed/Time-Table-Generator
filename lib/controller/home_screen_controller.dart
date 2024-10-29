@@ -18,7 +18,7 @@ Future<void> addDataToFirebase({
     homeScreenBloc.add(AddingButtonCircularIndicatorEvent());
     await FirebaseFirestore.instance.collection(collectionName).add({
       'name': textController.text,
-      'createdAt': Timestamp.now(),
+      'createdAt': Timestamp.now(),      
     });
     homeScreenBloc.add(AddingButtonCircularIndicatorStopEvent());
     snackbarMessageWidget(text: isAddCourse ? 'Course Added' : 'Staff Added', context: context, color: Colors.green, textColor: Colors.white, behavior: SnackBarBehavior.floating, time: 3000);

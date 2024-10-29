@@ -12,7 +12,7 @@ class CourseScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: HomeScreenAppBarWidget(screenSize: screenSize,title: courseName,isBack: true,),
-      body: CourseScreenBody(screenSize: screenSize),
+      body: CourseScreenBody(screenSize: screenSize,courseName: courseName,),
       floatingActionButton: FloatingButton(screenSize: screenSize,courseName: courseName,)
     );
   }
