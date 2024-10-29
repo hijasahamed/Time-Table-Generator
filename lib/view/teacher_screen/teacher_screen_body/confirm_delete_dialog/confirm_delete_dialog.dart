@@ -6,25 +6,20 @@ void confirmStaffDelete({required BuildContext context,required String staffName
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey[850],
+        backgroundColor: const Color.fromARGB(255, 36, 36, 36),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextWidget(
-              text: 'Are you sure you want to delete',
+              text: 'Are you sure you want to delete the staff $staffName',
               color: Colors.white,
               size: screenSize.width / 25,
               fontFamily: '',
               weight: FontWeight.normal,
+              maxline: true,
+              alignTextCenter: true,
             ),
-            const SizedBox(height: 8),
-            TextWidget(
-              text: staffName,
-              color: Colors.white,
-              size: screenSize.width / 25,
-              fontFamily: '',
-              weight: FontWeight.bold,
-            ),
+            SizedBox(height: screenSize.width/75),           
           ],
         ),
         actions: [
@@ -35,12 +30,12 @@ void confirmStaffDelete({required BuildContext context,required String staffName
               color: Colors.white,
               size: screenSize.width / 25,
               fontFamily: '',
-              weight: FontWeight.bold,
+              weight: FontWeight.w500,
             ),
           ),
           TextButton(
             onPressed: () {             
-              deleteStaff(docId: docId).then((value) {
+              deleteStaff(docId: docId,context: context).then((value) {
                 Navigator.of(context).pop();
               },);
             },
@@ -49,7 +44,7 @@ void confirmStaffDelete({required BuildContext context,required String staffName
               color: Colors.white,
               size: screenSize.width / 25,
               fontFamily: '',
-              weight: FontWeight.bold,
+              weight: FontWeight.w500,
             ),
           ),
         ],

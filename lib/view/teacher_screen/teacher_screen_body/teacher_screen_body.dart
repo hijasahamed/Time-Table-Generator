@@ -42,6 +42,7 @@ class TeacherScreenBodyWidget extends StatelessWidget {
             final subjects = List<String>.from(doc['subjects'] ?? []);
     
             return Container(
+              margin: EdgeInsets.all(screenSize.width/75),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(screenSize.width / 40),
                 gradient: const LinearGradient(
