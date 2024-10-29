@@ -58,13 +58,21 @@ class CourseSubjectWidget extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(screenSize.width / 50),
               ),
-              child: Center(
-                child: TextWidget(
-                  text: subject,
-                  color: Colors.white,
-                  size: screenSize.width / 20,
-                  fontFamily: '',
-                  weight: FontWeight.bold,
+              child: Padding(
+                padding: EdgeInsets.all(screenSize.width/60),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,                
+                  children: [
+                    TextWidget(
+                      text: subject,
+                      color: Colors.white,
+                      size: screenSize.width / 20,
+                      fontFamily: '',
+                      weight: FontWeight.bold,
+                    ),
+                    TeachingStaffName(screenSize: screenSize, subject: subject),
+                  ],
                 ),
               ),
             );
@@ -72,5 +80,72 @@ class CourseSubjectWidget extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class TeachingStaffName extends StatelessWidget {
+  const TeachingStaffName({
+    super.key,
+    required this.screenSize,
+    required this.subject,
+  });
+
+  final Size screenSize;
+  final String subject;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection('staff').snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+    
+            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+              return Center(
+                child: TextWidget(
+                  text: 'No Staff Found',
+                  color: Colors.grey,
+                  size: screenSize.width / 25,
+                  fontFamily: '',
+                  weight: FontWeight.w500,
+                ),
+              );
+            }
+    
+
+            List<String> staffNames = [];
+            for (var doc in snapshot.data!.docs) {
+              Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+              List<dynamic> subjects = data['subjects'] ?? [];
+              
+              if (subjects.contains(subject)) {
+                staffNames.add(data['staffName'] ?? 'No Name');
+              }
+            }
+    
+
+            if (staffNames.isEmpty) {
+              return TextWidget(
+                text: 'No Staff Teaching This Subject',
+                color: Colors.red,
+                size: screenSize.width / 30,
+                fontFamily: '',
+                weight: FontWeight.w500,
+              );
+            }
+    
+            return Column(
+              children: staffNames.map((name) => TextWidget(
+                text: 'Teacher : $name',
+                color: Colors.green,
+                size: screenSize.width / 30,
+                fontFamily: '',
+                weight: FontWeight.bold,
+              )).toList(),
+            );
+          },
+        );
   }
 }
