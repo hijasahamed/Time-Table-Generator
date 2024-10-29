@@ -49,11 +49,17 @@ void showAlertDialogForDataAdding({
               SizedBox(height: screenSize.height / 30),
               if (isAddStaff)
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    TextWidget(text: 'SELECT THE SUBJECTS', color: Colors.blueGrey, size: screenSize.width/30, fontFamily: '', weight: FontWeight.w500),
+                    
                     Container(
                       height: screenSize.height / 2,
                       width: screenSize.width,
-                      color: Colors.white,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(screenSize.width/75),
+                        border: Border.all(width: .2,color: Colors.grey)
+                      ),
                       child: StreamBuilder<QuerySnapshot>(
                         stream: FirebaseFirestore.instance
                             .collection('subjects')
