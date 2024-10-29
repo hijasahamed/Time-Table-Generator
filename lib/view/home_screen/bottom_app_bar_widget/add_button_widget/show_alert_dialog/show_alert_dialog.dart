@@ -33,7 +33,7 @@ void showAlertDialogForDataAdding({
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: const Icon(Icons.close))
+                icon: Icon(Icons.close,size: screenSize.width/12,))
           ],
         ),
         content: Column(

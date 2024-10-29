@@ -5,16 +5,26 @@ class HomeScreenAppBarWidget extends StatelessWidget implements PreferredSizeWid
   const HomeScreenAppBarWidget({
     super.key,
     required this.screenSize,
+    required this.title,
+    this.isBack,
   });
 
   final Size screenSize;
-
+  final String title;
+  final bool? isBack;
   @override
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
+      automaticallyImplyLeading: false,
+      leading: (isBack == true)? IconButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        }, 
+        icon: const Icon(Icons.arrow_back_ios,color: Colors.white,)
+      ):null,
       backgroundColor: Colors.black,
-      title: TextWidget(text: 'Time Table Generator', color: Colors.white, size: screenSize.width/18, fontFamily: '', weight: FontWeight.w600),
+      title: TextWidget(text: title, color: Colors.white, size: screenSize.width/18, fontFamily: '', weight: FontWeight.w600),
     );
   }
   @override

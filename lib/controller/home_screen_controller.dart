@@ -6,7 +6,6 @@ import 'package:time_table/model/snackbar_widget.dart';
 import 'package:time_table/view/home_screen/bloc/home_screen_bloc.dart';
 
 
-
 Future<void> addDataToFirebase({
   required bool isAddCourse,
   required bool isAddStaff,

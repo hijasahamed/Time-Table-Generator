@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: HomeScreenAppBarWidget(screenSize: screenSize),
+      appBar: HomeScreenAppBarWidget(screenSize: screenSize,title: 'Time Table Generator',),
       body: HomeScreenBodyWidget(screenSize: screenSize,),
       bottomNavigationBar: HomeScreenBottomAppBarWidget(screenSize: screenSize),
     );
