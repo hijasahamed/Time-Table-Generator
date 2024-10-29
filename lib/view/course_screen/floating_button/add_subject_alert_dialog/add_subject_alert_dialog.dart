@@ -30,6 +30,7 @@ void showAddSubjectsDialog(
               fontFamily: '',
               weight: FontWeight.bold,
             ),
+            const Spacer(),
             AlertCloseButton(screenSize: screenSize,)
           ],
         ),

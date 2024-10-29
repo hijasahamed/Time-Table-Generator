@@ -11,15 +11,24 @@ Future<void> addDataToFirebase({
   required bool isAddStaff,
   required TextEditingController textController,
   required BuildContext context,
-  required HomeScreenBloc homeScreenBloc
+  required HomeScreenBloc homeScreenBloc,
+  required List selectedSubjects
   }) async {
   String collectionName = isAddCourse ? 'courses' : 'staff';
   if (collectionName.isNotEmpty&& textController.text.isNotEmpty) {
     homeScreenBloc.add(AddingButtonCircularIndicatorEvent());
-    await FirebaseFirestore.instance.collection(collectionName).add({
-      'name': textController.text,
-      'createdAt': Timestamp.now(),      
-    });
+    if(collectionName == 'courses'){
+      await FirebaseFirestore.instance.collection(collectionName).add({
+        'name': textController.text,
+        'createdAt': Timestamp.now(),      
+      });
+    }else{
+      await FirebaseFirestore.instance.collection(collectionName).add({
+        'staffName': textController.text,
+        'createdAt': Timestamp.now(),
+        'subjects' : selectedSubjects,      
+      });
+    }
     homeScreenBloc.add(AddingButtonCircularIndicatorStopEvent());
     snackbarMessageWidget(text: isAddCourse ? 'Course Added' : 'Staff Added', context: context, color: Colors.green, textColor: Colors.white, behavior: SnackBarBehavior.floating, time: 3000);
   }

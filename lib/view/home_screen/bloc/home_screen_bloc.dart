@@ -13,6 +13,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     });
     on<AddingButtonCircularIndicatorEvent>(addingButtonCircularIndicatorEvent);
     on<AddingButtonCircularIndicatorStopEvent>(addingButtonCircularIndicatorStopEvent);
+    on<RefreshSelectSubjectScreenEvent>(refreshSelectSubjectScreenEvent);
   }
 
   FutureOr<void> addingButtonCircularIndicatorEvent(
@@ -23,5 +24,10 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   FutureOr<void> addingButtonCircularIndicatorStopEvent(
     AddingButtonCircularIndicatorStopEvent event, Emitter<HomeScreenState> emit) {
       emit(AddingButtonCircularIndicatorStopState());
+  }
+
+  FutureOr<void> refreshSelectSubjectScreenEvent(
+    RefreshSelectSubjectScreenEvent event, Emitter<HomeScreenState> emit) {
+      emit(RefreshSelectSubjectScreenState());
   }
 }

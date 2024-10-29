@@ -5,3 +5,5 @@ sealed class HomeScreenEvent {}
 
 class AddingButtonCircularIndicatorEvent extends HomeScreenEvent {}
 class AddingButtonCircularIndicatorStopEvent extends HomeScreenEvent {}
+
+class RefreshSelectSubjectScreenEvent extends HomeScreenEvent {}

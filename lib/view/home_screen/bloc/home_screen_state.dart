@@ -7,3 +7,5 @@ final class HomeScreenInitial extends HomeScreenState {}
 
 class AddingButtonCircularIndicatorState extends HomeScreenState {}
 class AddingButtonCircularIndicatorStopState extends HomeScreenState {}
+
+class RefreshSelectSubjectScreenState extends HomeScreenState {}
