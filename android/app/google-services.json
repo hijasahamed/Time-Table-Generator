@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "933442930173",
+    "project_id": "time-table-generator-7dd25",
+    "storage_bucket": "time-table-generator-7dd25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933442930173:android:495d9a02ea34afa2a44594",
+        "android_client_info": {
+          "package_name": "com.time_table"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNc0aquLk_ezrLl4HoTei0kwRQq0tgjk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
