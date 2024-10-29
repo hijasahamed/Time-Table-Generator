@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:time_table/controller/teacher_screen_controller.dart';
 import 'package:time_table/model/text_widget_model.dart';
+import 'package:time_table/view/teacher_screen/teacher_screen_body/confirm_delete_dialog/confirm_delete_dialog.dart';
 
 class TeacherScreenBodyWidget extends StatelessWidget {
   const TeacherScreenBodyWidget({
@@ -17,13 +17,13 @@ class TeacherScreenBodyWidget extends StatelessWidget {
       stream: FirebaseFirestore.instance.collection('staff').orderBy('createdAt').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator(color: Colors.white,));
         }
         if (snapshot.hasError) {
-          return const Center(child: Text('Error loading data'));
+          return Center(child: TextWidget(text: 'Error loading data', color: Colors.white, size: screenSize.width/20, fontFamily: '', weight: FontWeight.w300));
         }
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return const Center(child: Text('No staff data available'));
+          return Center(child: TextWidget(text: 'No staff data available', color: Colors.white, size: screenSize.width/20, fontFamily: '', weight: FontWeight.w300));
         }
     
         final staffDocs = snapshot.data!.docs;
@@ -70,8 +70,8 @@ class TeacherScreenBodyWidget extends StatelessWidget {
                     top: 8,
                     right: 8,
                     child: IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.red),
-                      onPressed: () => deleteStaff(docId: doc.id)
+                      icon: const Icon(Icons.delete, color: Colors.white),
+                      onPressed: () => confirmStaffDelete(context: context, staffName: staffName, docId: doc.id, screenSize: screenSize)
                     ),
                   ),
                 ],

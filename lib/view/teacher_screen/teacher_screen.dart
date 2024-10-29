@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:time_table/view/home_screen/app_bar_widget/app_bar_widget.dart';
 import 'package:time_table/view/teacher_screen/teacher_screen_body/teacher_screen_body.dart';
