@@ -23,7 +23,7 @@ Future<void> addDataToFirebase({
   String collectionName = isAddCourse ? 'courses' : 'staff';
   if (collectionName.isNotEmpty && textController.text.isNotEmpty) {
     homeScreenBloc.add(AddingButtonCircularIndicatorEvent());
-    if(collectionName == 'courses'){
+    if(collectionName == 'courses' && isEditCourse != true){
       await FirebaseFirestore.instance.collection(collectionName).add({
         'name': textController.text,
         'createdAt': Timestamp.now(),      
