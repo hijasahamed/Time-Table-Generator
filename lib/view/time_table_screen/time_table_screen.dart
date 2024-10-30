@@ -7,6 +7,7 @@ class TimeTableScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: HomeScreenAppBarWidget(screenSize: screenSize, title: 'Time Table',isBack: true,),
     );
   }

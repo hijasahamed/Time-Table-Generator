@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:time_table/controller/course_screen_controller.dart';
 import 'package:time_table/model/text_widget_model.dart';
+import 'package:time_table/view/time_table_screen/time_table_screen.dart';
 
 class CourseScreenBottomNavBar extends StatelessWidget {
   const CourseScreenBottomNavBar({
@@ -25,7 +26,9 @@ class CourseScreenBottomNavBar extends StatelessWidget {
             color: Colors.black,
             child: InkWell(
               onTap: () {
-                
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                  return TimeTableScreen(screenSize: screenSize);
+                },));
               },
               child: Container(
                 height: screenSize.height/15,
