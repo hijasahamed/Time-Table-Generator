@@ -27,7 +27,7 @@ class CourseScreenBottomNavBar extends StatelessWidget {
             child: InkWell(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                  return TimeTableScreen(screenSize: screenSize);
+                  return TimeTableScreen(screenSize: screenSize,courseName: courseName,);
                 },));
               },
               child: Container(
