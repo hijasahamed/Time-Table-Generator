@@ -43,7 +43,7 @@ class TimeTableScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: HomeScreenAppBarWidget(
         screenSize: screenSize,
-        title: 'Time Table',
+        title: courseName,
         isBack: true,
       ),
       body: FutureBuilder<List<String>>(
@@ -73,26 +73,20 @@ class TimeTableScreen extends StatelessWidget {
 
               return Card(
                 color: Colors.grey[850],
-                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                margin: EdgeInsets.symmetric(vertical: screenSize.width/75, horizontal: screenSize.width/75),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(screenSize.width/75),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(day, style: const TextStyle(fontSize: 20, color: Colors.white)),
-                      const SizedBox(height: 5),
+                      TextWidget(text: day, color: Colors.white, size: screenSize.width/18, fontFamily:'', weight: FontWeight.w400),
+                      SizedBox(height: screenSize.width/120),
                       Column(
-                        children: List.generate(periods.length, (i) {
+                        children: List.generate(periods.length, (value) {
                           return Row(
                             children: [
-                              Text(
-                                'Period ${i + 1}: ',
-                                style: const TextStyle(fontSize: 16, color: Colors.white70),
-                              ),
-                              Text(
-                                periods[i],
-                                style: const TextStyle(fontSize: 16, color: Colors.white),
-                              ),
+                              TextWidget(text: 'Period ${value + 1}:', color: Colors.white70, size: screenSize.width/25, fontFamily:'', weight: FontWeight.w400),
+                              TextWidget(text: periods[value], color: Colors.white, size: screenSize.width/25, fontFamily:'', weight: FontWeight.w400),                                                           
                             ],
                           );
                         }),

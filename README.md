@@ -11,11 +11,6 @@ A Flutter-based timetable generation application that allows administrators to m
 ### 2. Subject Management
 - **Subject Creation**: Add subjects under specific courses to organize the curriculum.
 
-### 3. Days and Periods Management
-- **Weekly Structure**: Define a weekly timetable structure covering Monday to Friday.
-- **Periods per Day**: Each day consists of 4 periods, totaling 20 periods per week.
-- **Custom Timings** *(Optional)*: Set custom start and end times for each period (e.g., 9:00 AM - 10:00 AM).
-
 ### 4. Staff Management
 - **CRUD Operations**: Manage staff by adding, editing, or deleting staff members.
 - **Subject Proficiency**: Assign multiple subjects to each staff member based on their expertise.
@@ -32,7 +27,7 @@ A Flutter-based timetable generation application that allows administrators to m
 ## Technical Specifications
 
 - **Frontend**: Developed using Flutter for a seamless cross-platform experience.
-- **Backend**: Choose between Firebase or SQLite for data storage, based on project requirements.
+- **Backend**: Developed using firebase for realtime data management.
 
 ## Getting Started
 
@@ -43,11 +38,3 @@ To get started with this application:
 3. **Install Dependencies**: Run `flutter pub get` to install dependencies.
 4. **Configure Backend**: Choose either Firebase or SQLite for data storage and configure accordingly.
 5. **Run the Application**: Use `flutter run` to launch the app on a connected device or emulator.
-
-## Resources
-
-For help with Flutter development, view the [Flutter documentation](https://docs.flutter.dev/), which provides tutorials, samples, and guidance on mobile development.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
