@@ -25,7 +25,9 @@ class AddButtonWidget extends StatelessWidget {
             isEditStaff: false,
             staffName: '',
             docId: '',
-            subjects: []
+            subjects: [],
+            isEditCourse: false,
+            edit: false
           );
         },
         child: Ink(

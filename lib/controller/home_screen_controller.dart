@@ -1,9 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:time_table/model/snackbar_widget.dart';
 import 'package:time_table/view/home_screen/bloc/home_screen_bloc.dart';
+import 'package:time_table/view/teacher_screen/bloc/teachers_screen_bloc.dart';
 
 
 Future<void> addDataToFirebase({
@@ -52,5 +55,24 @@ Future<void> addDataToFirebase({
   }
   else{
     snackbarMessageWidget(text: 'Enter a valid data', context: context, color: Colors.red, textColor: Colors.white, behavior: SnackBarBehavior.floating, time: 3000);
+  }
+}
+
+
+Future<void> deleteCourse({required String docId,required BuildContext context,required TeachersScreenBloc teachersScreenBloc}) async {
+  try {
+    teachersScreenBloc.add(DeleteTeacherCircularIndicatorEvent());
+    await FirebaseFirestore.instance.collection('courses').doc(docId).delete();
+    teachersScreenBloc.add(DeleteTeacherCircularIndicatorStopEvent());
+    snackbarMessageWidget(
+    text: 'Course Removed',
+    context: context,
+    color: Colors.green,
+    textColor: Colors.white,
+    behavior: SnackBarBehavior.floating,
+    time: 3000);
+    Navigator.of(context).pop();    
+  } catch (e) {
+    log(e.toString());
   }
 }

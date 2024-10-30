@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:time_table/controller/home_screen_controller.dart';
 import 'package:time_table/controller/teacher_screen_controller.dart';
 import 'package:time_table/model/snackbar_widget.dart';
 import 'package:time_table/model/text_widget_model.dart';
 import 'package:time_table/view/teacher_screen/bloc/teachers_screen_bloc.dart';
 
-void confirmStaffDelete(
+void confirmStaffAndCourseDelete(
     {required BuildContext context,
     required String staffName,
     required String docId,
-    required Size screenSize}) {
+    required Size screenSize,
+    required String courseName,
+    required bool isCourseDelete,
+    }) {
 
   TeachersScreenBloc teachersScreenBloc = TeachersScreenBloc();
   showDialog(
@@ -20,7 +24,7 @@ void confirmStaffDelete(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextWidget(
-            text: 'Are you sure you want to delete the staff $staffName',
+            text: 'Are you sure you want to delete the ${isCourseDelete? 'Course':'Staff'} ${isCourseDelete? courseName:staffName}',
             color: Colors.white,
             size: screenSize.width / 25,
             fontFamily: '',
@@ -44,10 +48,11 @@ void confirmStaffDelete(
         ),
         TextButton(
           onPressed: () {
+            isCourseDelete? deleteCourse(docId: docId, context: context, teachersScreenBloc: teachersScreenBloc):
             deleteStaff(docId: docId, context: context,teachersScreenBloc: teachersScreenBloc).then(
               (value) {
                 snackbarMessageWidget(
-                    text: 'Staff Removed',
+                    text: isCourseDelete?'Course Removed':'Staff Removed',
                     context: context,
                     color: Colors.green,
                     textColor: Colors.white,

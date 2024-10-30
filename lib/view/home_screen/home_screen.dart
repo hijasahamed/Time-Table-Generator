@@ -12,8 +12,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: HomeScreenAppBarWidget(screenSize: screenSize,title: 'Time Table Generator',isHomeScreen: true,),
       body: HomeScreenBodyWidget(screenSize: screenSize,),
-      bottomNavigationBar: HomeScreenBottomAppBarWidget(screenSize: screenSize),
-      
+      bottomNavigationBar: HomeScreenBottomAppBarWidget(screenSize: screenSize),      
     );
   }
 }

@@ -27,7 +27,7 @@ class PopUpMenuButtonWidget extends StatelessWidget {
         icon: const Icon(Icons.more_vert, color: Colors.white),
         onSelected: (value) {
           if (value == 'delete') {
-            confirmStaffDelete(context: context, staffName: staffName, docId: doc.id, screenSize: screenSize);
+            confirmStaffAndCourseDelete(context: context, staffName: staffName, docId: doc.id, screenSize: screenSize,courseName: '',isCourseDelete: false);
           } else if (value == 'edit') {
             showAlertDialogForDataAdding(
               context: context,
@@ -37,7 +37,9 @@ class PopUpMenuButtonWidget extends StatelessWidget {
               staffName: staffName,
               subjects: doc['subjects'] ?? [],
               screenSize: screenSize,
-              docId: doc.id
+              docId: doc.id,
+              isEditCourse: false,
+              edit: true
             );
           }
         },

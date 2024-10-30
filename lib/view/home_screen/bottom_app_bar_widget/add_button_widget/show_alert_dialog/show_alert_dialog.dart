@@ -14,7 +14,9 @@ void showAlertDialogForDataAdding({
   required String staffName,
   required List subjects,
   required bool isEditStaff,
-  required String docId
+  required String docId,
+  required bool isEditCourse,
+  required bool edit
 }) {
   final TextEditingController textController = TextEditingController();
 
@@ -25,6 +27,9 @@ void showAlertDialogForDataAdding({
   if(isEditStaff==true){
     textController.text=staffName;
     selectedSubjects.addAll((subjects).cast<String>());
+  }
+  else if(isEditCourse == true){
+    textController.text = staffName;
   }
 
   showDialog(
@@ -60,8 +65,7 @@ void showAlertDialogForDataAdding({
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    TextWidget(text: 'SELECT THE SUBJECTS', color: Colors.blueGrey, size: screenSize.width/30, fontFamily: '', weight: FontWeight.w500),
-                    
+                    TextWidget(text: 'SELECT THE SUBJECTS', color: Colors.blueGrey, size: screenSize.width/30, fontFamily: '', weight: FontWeight.w500),                    
                     Container(
                       height: screenSize.height / 2,
                       width: screenSize.width,
@@ -140,6 +144,7 @@ void showAlertDialogForDataAdding({
                 screenSize: screenSize,
                 docId: docId,
                 isEditStaff: isEditStaff,
+                edit: edit,
               )
             ],
           ),
@@ -159,7 +164,9 @@ class AddDataToDb extends StatelessWidget {
       required this.isAddStaff,
       required this.isEditStaff,
       required this.docId,
-      required this.screenSize});
+      required this.screenSize,
+      required this.edit
+      });
 
   final TextEditingController textController;
   final HomeScreenBloc homeScreenBloc;
@@ -169,6 +176,7 @@ class AddDataToDb extends StatelessWidget {
   final Size screenSize;
   final bool isEditStaff;
   final String docId;
+  final bool edit;
 
   @override
   Widget build(BuildContext context) {
@@ -205,10 +213,11 @@ class AddDataToDb extends StatelessWidget {
                   )
                 : state is AddingButtonCircularIndicatorStopState
                     ? AddButtonText(
-                        isAddCourse: isAddCourse, screenSize: screenSize)
+                        isAddCourse: isAddCourse, screenSize: screenSize,edit: edit,)
                     : AddButtonText(
                         isAddCourse: isAddCourse,
                         screenSize: screenSize,
+                        edit: edit,
                       );
           },
         )),
@@ -243,13 +252,15 @@ class TitleWidget extends StatelessWidget {
 
 class AddButtonText extends StatelessWidget {
   const AddButtonText(
-      {super.key, required this.isAddCourse, required this.screenSize});
+      {super.key, required this.isAddCourse, required this.screenSize,required this.edit});
   final Size screenSize;
   final bool isAddCourse;
+  final bool edit;
+  
   @override
   Widget build(BuildContext context) {
     return TextWidget(
-        text: isAddCourse ? 'Add New Course' : 'Add New Staff',
+        text: edit ? 'Update' : 'Add',
         color: Colors.green,
         size: screenSize.width / 28,
         fontFamily: '',
