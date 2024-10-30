@@ -39,6 +39,13 @@ Future<void> addDataToFirebase({
       snackbarMessageWidget(text: 'Staff Updated', context: context, color: Colors.green, textColor: Colors.white, behavior: SnackBarBehavior.floating, time: 3000);
       Navigator.of(context).pop();
     }
+    else if(isEditCourse == true ){
+      await FirebaseFirestore.instance.collection(collectionName).doc(docId).update({
+        'name': textController.text,
+      });
+      snackbarMessageWidget(text: 'Course Updated', context: context, color: Colors.green, textColor: Colors.white, behavior: SnackBarBehavior.floating, time: 3000);
+      Navigator.of(context).pop();
+    }
     else{
       if(selectedSubjects.isNotEmpty){
         await FirebaseFirestore.instance.collection(collectionName).add({

@@ -14,6 +14,8 @@ Future<bool> doesCourseExist({required String courseName}) async {
   return docSnapshot.exists;
 }
 
+
+// Function to add the subjects of the Course to firebase 
 Future<void> addSubjectsToFirestore(
     {required String courseName,
     required TextEditingController sub1Controller,
