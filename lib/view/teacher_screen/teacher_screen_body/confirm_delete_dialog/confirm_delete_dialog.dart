@@ -48,7 +48,7 @@ void confirmStaffAndCourseDelete(
         ),
         TextButton(
           onPressed: () {
-            isCourseDelete? deleteCourse(docId: docId, context: context, teachersScreenBloc: teachersScreenBloc):
+            isCourseDelete? deleteCourse(docId: docId, context: context, teachersScreenBloc: teachersScreenBloc,coursename: courseName):
             deleteStaff(docId: docId, context: context,teachersScreenBloc: teachersScreenBloc).then(
               (value) {
                 snackbarMessageWidget(

@@ -67,10 +67,11 @@ Future<void> addDataToFirebase({
 }
 
 
-Future<void> deleteCourse({required String docId,required BuildContext context,required TeachersScreenBloc teachersScreenBloc}) async {
+Future<void> deleteCourse({required String docId,required BuildContext context,required TeachersScreenBloc teachersScreenBloc,required String coursename}) async {
   try {
     teachersScreenBloc.add(DeleteTeacherCircularIndicatorEvent());
     await FirebaseFirestore.instance.collection('courses').doc(docId).delete();
+    await FirebaseFirestore.instance.collection('subjects').doc(coursename).delete();
     teachersScreenBloc.add(DeleteTeacherCircularIndicatorStopEvent());
     snackbarMessageWidget(
     text: 'Course Removed',
