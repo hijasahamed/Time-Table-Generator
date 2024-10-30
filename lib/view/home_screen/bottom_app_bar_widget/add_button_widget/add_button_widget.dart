@@ -18,10 +18,15 @@ class AddButtonWidget extends StatelessWidget {
       child: InkWell(
         onTap: () {
           showAlertDialogForDataAdding(
-              context: context,
-              isAddCourse: isAddCourse,
-              isAddStaff: isAddStaff,
-              screenSize: screenSize);
+            context: context,
+            isAddCourse: isAddCourse,
+            isAddStaff: isAddStaff,
+            screenSize: screenSize,
+            isEditStaff: false,
+            staffName: '',
+            docId: '',
+            subjects: []
+          );
         },
         child: Ink(
           decoration: BoxDecoration(

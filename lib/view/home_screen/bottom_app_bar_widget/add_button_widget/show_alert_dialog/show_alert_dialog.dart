@@ -11,12 +11,21 @@ void showAlertDialogForDataAdding({
   required bool isAddCourse,
   required bool isAddStaff,
   required Size screenSize,
+  required String staffName,
+  required List subjects,
+  required bool isEditStaff,
+  required String docId
 }) {
   final TextEditingController textController = TextEditingController();
 
   HomeScreenBloc homeScreenBloc = HomeScreenBloc();
   final List<String> selectedSubjects = [];
   HomeScreenBloc refreshStateBloc = HomeScreenBloc();
+
+  if(isEditStaff==true){
+    textController.text=staffName;
+    selectedSubjects.addAll((subjects).cast<String>());
+  }
 
   showDialog(
     context: context,
@@ -129,6 +138,8 @@ void showAlertDialogForDataAdding({
                 isAddCourse: isAddCourse,
                 isAddStaff: isAddStaff,
                 screenSize: screenSize,
+                docId: docId,
+                isEditStaff: isEditStaff,
               )
             ],
           ),
@@ -146,6 +157,8 @@ class AddDataToDb extends StatelessWidget {
       required this.selectedSubjects,
       required this.isAddCourse,
       required this.isAddStaff,
+      required this.isEditStaff,
+      required this.docId,
       required this.screenSize});
 
   final TextEditingController textController;
@@ -154,23 +167,23 @@ class AddDataToDb extends StatelessWidget {
   final bool isAddCourse;
   final bool isAddStaff;
   final Size screenSize;
+  final bool isEditStaff;
+  final String docId;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
         addDataToFirebase(
-                isAddCourse: isAddCourse,
-                isAddStaff: isAddStaff,
-                textController: textController,
-                context: context,
-                homeScreenBloc: homeScreenBloc,
-                selectedSubjects: selectedSubjects)
-            .then(
-          (value) {
-            Navigator.of(context).pop();
-          },
-        );
+          isAddCourse: isAddCourse,
+          isAddStaff: isAddStaff,
+          textController: textController,
+          context: context,
+          homeScreenBloc: homeScreenBloc,
+          isEditStaff: isEditStaff,
+          selectedSubjects: selectedSubjects,
+          docId: docId
+        );            
       },
       child: Ink(
         decoration: BoxDecoration(

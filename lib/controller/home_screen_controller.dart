@@ -12,25 +12,43 @@ Future<void> addDataToFirebase({
   required TextEditingController textController,
   required BuildContext context,
   required HomeScreenBloc homeScreenBloc,
-  required List selectedSubjects
+  required List selectedSubjects,
+  required bool isEditStaff,
+  required String docId
   }) async {
   String collectionName = isAddCourse ? 'courses' : 'staff';
-  if (collectionName.isNotEmpty&& textController.text.isNotEmpty) {
+  if (collectionName.isNotEmpty && textController.text.isNotEmpty) {
     homeScreenBloc.add(AddingButtonCircularIndicatorEvent());
     if(collectionName == 'courses'){
       await FirebaseFirestore.instance.collection(collectionName).add({
         'name': textController.text,
         'createdAt': Timestamp.now(),      
       });
-    }else{
-      await FirebaseFirestore.instance.collection(collectionName).add({
-        'staffName': textController.text,
-        'createdAt': Timestamp.now(),
-        'subjects' : selectedSubjects,      
-      });
+      snackbarMessageWidget(text:  'Course Added' , context: context, color: Colors.green, textColor: Colors.white, behavior: SnackBarBehavior.floating, time: 3000);
+      Navigator.of(context).pop();
     }
-    homeScreenBloc.add(AddingButtonCircularIndicatorStopEvent());
-    snackbarMessageWidget(text: isAddCourse ? 'Course Added' : 'Staff Added', context: context, color: Colors.green, textColor: Colors.white, behavior: SnackBarBehavior.floating, time: 3000);
+    else if(isEditStaff == true ){
+      await FirebaseFirestore.instance.collection(collectionName).doc(docId).update({
+        'staffName': textController.text,
+        'subjects': selectedSubjects,
+      });
+      snackbarMessageWidget(text: 'Staff Updated', context: context, color: Colors.green, textColor: Colors.white, behavior: SnackBarBehavior.floating, time: 3000);
+      Navigator.of(context).pop();
+    }
+    else{
+      if(selectedSubjects.isNotEmpty){
+        await FirebaseFirestore.instance.collection(collectionName).add({
+          'staffName': textController.text,
+          'createdAt': Timestamp.now(),
+          'subjects' : selectedSubjects,      
+        });
+        snackbarMessageWidget(text: 'Staff Added', context: context, color: Colors.green, textColor: Colors.white, behavior: SnackBarBehavior.floating, time: 3000);
+        Navigator.of(context).pop();
+      }else{
+        snackbarMessageWidget(text: 'Select Subjects', context: context, color: Colors.red, textColor: Colors.white, behavior: SnackBarBehavior.floating, time: 3000);
+      }      
+    }
+    homeScreenBloc.add(AddingButtonCircularIndicatorStopEvent());    
   }
   else{
     snackbarMessageWidget(text: 'Enter a valid data', context: context, color: Colors.red, textColor: Colors.white, behavior: SnackBarBehavior.floating, time: 3000);

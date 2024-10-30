@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:time_table/controller/teacher_screen_controller.dart';
+import 'package:time_table/model/snackbar_widget.dart';
 import 'package:time_table/model/text_widget_model.dart';
 
 void confirmStaffDelete({required BuildContext context,required String staffName,required String docId,required Size screenSize}) {
@@ -36,7 +37,7 @@ void confirmStaffDelete({required BuildContext context,required String staffName
           TextButton(
             onPressed: () {             
               deleteStaff(docId: docId,context: context).then((value) {
-                Navigator.of(context).pop();
+                snackbarMessageWidget(text: 'Staff Removed', context: context, color: Colors.green, textColor: Colors.white, behavior:SnackBarBehavior.floating, time: 3000);
               },);
             },
             child: TextWidget(
