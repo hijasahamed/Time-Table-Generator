@@ -17,7 +17,8 @@ Future<void> addDataToFirebase({
   required HomeScreenBloc homeScreenBloc,
   required List selectedSubjects,
   required bool isEditStaff,
-  required String docId
+  required String docId,
+  required bool isEditCourse
   }) async {
   String collectionName = isAddCourse ? 'courses' : 'staff';
   if (collectionName.isNotEmpty && textController.text.isNotEmpty) {

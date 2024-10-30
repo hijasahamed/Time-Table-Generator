@@ -145,6 +145,7 @@ void showAlertDialogForDataAdding({
                 docId: docId,
                 isEditStaff: isEditStaff,
                 edit: edit,
+                isEditCourse: isEditCourse,
               )
             ],
           ),
@@ -165,7 +166,8 @@ class AddDataToDb extends StatelessWidget {
       required this.isEditStaff,
       required this.docId,
       required this.screenSize,
-      required this.edit
+      required this.edit,
+      required this.isEditCourse
       });
 
   final TextEditingController textController;
@@ -177,6 +179,7 @@ class AddDataToDb extends StatelessWidget {
   final bool isEditStaff;
   final String docId;
   final bool edit;
+  final bool isEditCourse;
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +193,8 @@ class AddDataToDb extends StatelessWidget {
           homeScreenBloc: homeScreenBloc,
           isEditStaff: isEditStaff,
           selectedSubjects: selectedSubjects,
-          docId: docId
+          docId: docId,
+          isEditCourse: isEditCourse,
         );            
       },
       child: Ink(
