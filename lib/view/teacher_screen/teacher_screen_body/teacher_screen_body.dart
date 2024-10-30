@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:time_table/model/text_widget_model.dart';
-import 'package:time_table/view/teacher_screen/teacher_screen_body/confirm_delete_dialog/confirm_delete_dialog.dart';
+import 'package:time_table/view/teacher_screen/teacher_screen_body/teachers_details_grid_card_widget/teachers_details_grid_card_widget.dart';
 
 class TeacherScreenBodyWidget extends StatelessWidget {
   const TeacherScreenBodyWidget({
@@ -28,59 +28,13 @@ class TeacherScreenBodyWidget extends StatelessWidget {
     
         final staffDocs = snapshot.data!.docs;
     
-        return GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: screenSize.width / 25,
-            mainAxisSpacing: screenSize.height / 40,
-            childAspectRatio: 4 / 3,
-          ),
-          itemCount: staffDocs.length,
-          itemBuilder: (context, index) {
-            final doc = staffDocs[index];
-            final staffName = doc['staffName'] ?? 'No Name';
-            final subjects = List<String>.from(doc['subjects'] ?? []);
-    
-            return Container(
-              margin: EdgeInsets.all(screenSize.width/75),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(screenSize.width / 40),
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF6a11cb), Color(0xFF2575fc)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-              child: Stack(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(screenSize.width/75),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        TextWidget(text: staffName, color: Colors.white, size: screenSize.width/25, fontFamily: '', weight: FontWeight.bold),
-                        SizedBox(height: screenSize.height/50),
-                        TextWidget(text: 'Subjects:', color: Colors.white ,size: screenSize.width/30, fontFamily: '', weight: FontWeight.bold),
-                        SizedBox(height: screenSize.height/100),                        
-                        ...subjects.map((subject) => TextWidget(text: '- $subject', color: Colors.white, size: screenSize.width/31, fontFamily: '', weight: FontWeight.bold)),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    top: 8,
-                    right: 8,
-                    child: IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.white),
-                      onPressed: () => confirmStaffDelete(context: context, staffName: staffName, docId: doc.id, screenSize: screenSize)
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
+        return TeachersDetailsGridCardWidget(screenSize: screenSize, staffDocs: staffDocs);
       },
     );
   }
 }
+
+
+
+
+
